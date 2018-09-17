@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayoutGap="20px">
+  <h3>Personas</h3>
+  <button mat-raised-button color="primary" [routerLink]='["/addPersonas"]'>Agregar Persona</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Fecha Nacimiento</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="!(personas && personas.length)" class="text-center">
+      <td colspan="3">
+        No existen registros para mostrar
+      </td>
+    </tr>
+    <tr *ngFor="let persona of personas">
+      <td>{{persona.id}}</td>
+      <td>{{persona.nombre}}</td>
+      <td>{{persona.fechaNacimiento | date:'dd-MM-yyyy'}} </td>
+      <td>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <button mat-icon-button matTooltip="Editar" [matTooltipPosition]='["above"]'  [routerLink]='["/editPersonas/"+persona.id]'>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Eliminar" [matTooltipPosition]='["above"]' (click)="modalDialog(persona)">
+          <!--<button mat-icon-button color="primary" matTooltip="Eliminar" [matTooltipPosition]='["above"]' (click)="deletePersona(persona)">-->
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

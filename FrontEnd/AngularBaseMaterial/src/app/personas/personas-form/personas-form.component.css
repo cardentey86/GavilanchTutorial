@@ -1,0 +1,8 @@
+.has-error{
+    color: red;
+}
+
+.has-error #nombre, .has-error #fechaNacimiento{
+    border-color: red;
+    box-shadow: 0 0 2px red ;
+}

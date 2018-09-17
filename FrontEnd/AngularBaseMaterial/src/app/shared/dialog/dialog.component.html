@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayoutGap="30px">
+  <h3 mat-dialog-title="">{{data.title}}</h3>
+  <button mat-icon-button (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <p>{{data.message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button  mat-dialog-close>Cancelar</button>
+  <button mat-raised-button (click)="aceptar()" color="primary">Aceptar</button>
+</mat-dialog-actions>

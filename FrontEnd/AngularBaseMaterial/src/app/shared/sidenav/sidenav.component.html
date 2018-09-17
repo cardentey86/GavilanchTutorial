@@ -1,0 +1,31 @@
+  <mat-sidenav-container style="height: 100%;">
+    
+    <mat-sidenav #sidenav [(opened)]="opened" (opened)="events.push('open!')"
+                 [mode]="(screenWidth > 840) ? 'side' : 'over'"
+                 (closed)="events.push('close!')" style="background: #cbf3ff;">
+      <button style="position: absolute; right: 0" *ngIf="screenWidth < 840"  mat-icon-button (click)="AbrirCerrar()">
+        <mat-icon [@rotatedState]='state' >arrow_back</mat-icon>
+      </button>
+    <app-menu></app-menu>
+    
+  </mat-sidenav>
+  
+
+  <mat-sidenav-content>
+    <div fxLayout="row">
+    <div style="background: #cbf3ff; width: fit-content; height: fit-content" fxLayout="column">
+      <button  mat-icon-button (click)="AbrirCerrar()">
+        <mat-icon [@rotatedState]='state' >arrow_back</mat-icon>
+      </button>
+      <button  mat-icon-button>
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
+
+    <div class="col-12" style="padding-top: 10px">
+      <router-outlet></router-outlet>
+    </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
