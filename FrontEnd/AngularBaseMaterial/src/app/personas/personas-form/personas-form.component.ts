@@ -5,7 +5,6 @@ import {Persona} from '../persona';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DatePipe} from '@angular/common';
 
-
 @Component({
   selector: 'app-personas-form',
   templateUrl: './personas-form.component.html',
@@ -22,6 +21,15 @@ export class PersonasFormComponent implements OnInit {
   formGroup: FormGroup;
   modoEdicion: boolean = false;
   idPersona: number;
+  fecha: string;
+  pos: number;
+    date = new Date();
+
+    options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "numeric"
+    };
 
   ngOnInit() {
     this.formGroup = this.fb.group({
@@ -36,29 +44,34 @@ export class PersonasFormComponent implements OnInit {
       {
         return;
       }
-
         this.modoEdicion = true;
         this.idPersona = params["id"];
         this.personaService.getById(this.idPersona).subscribe(p => this.cargarFormularioEditar(p));
-
-
     })
 
   }
 
   cargarFormularioEditar(persona: Persona){
-    var dp = new DatePipe(navigator.language);
+   // var dp = new DatePipe(navigator.language);
+    this.pos = persona.fechaNacimiento.toString().indexOf('T');
+    this.fecha = persona.fechaNacimiento.toString().substr(0,this.pos);
+    //this.date = new Date(persona.fechaNacimiento);
 
     this.formGroup.patchValue({
-        nombre: persona.nombre
-        //fechaNacimiento: dp.transform(persona.fechaNacimiento, 'dd-MM-yyyy')
+        nombre: persona.nombre,
+
+        fechaNacimiento: this.fecha
+       // fechaNacimiento: dp.transform(persona.fechaNacimiento, "yyyy-MM-dd")
+
     });
+
+    console.log(this.fecha);
 
   }
 
+
   save(){
     let persona: Persona = Object.assign({},this.formGroup.value);
-
 
     if(this.modoEdicion){
         persona.id = this.idPersona;
