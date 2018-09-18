@@ -2,6 +2,8 @@
 <p *ngIf="modoEdicion">Editar Persona</p>
 
 <form class="form" [formGroup]="formGroup" novalidate (ngSubmit)="save()">
+
+
   <fieldset>
     <div class="form-group" [ngClass]="{'has-error': (formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && !formGroup.get('nombre').valid}">
       <label class="col-md-2" for="nombre">Nombre</label>
@@ -22,6 +24,18 @@
         <span class="" *ngIf="(formGroup.get('fechaNacimiento').touched || formGroup.get('fechaNacimiento').dirty) && formGroup.get('fechaNacimiento').errors">
           <span *ngIf="formGroup.get('fechaNacimiento').errors">
             La fecha es requerida
+          </span>
+        </span>
+      </div>
+    </div>
+  
+    <div class="form-group" [ngClass]="{'has-error': (formGroup.get('email').touched || formGroup.get('email').dirty) && !formGroup.get('email').valid}">
+      <label class="col-md-2" for="email">Fecha de Nacimiento</label>
+      <div class="col-md-8">
+        <input class="form-control" id="email" type="date" required formControlName="email">
+        <span class="" *ngIf="(formGroup.get('email').touched || formGroup.get('email').dirty) && formGroup.get('email').errors">
+          <span *ngIf="formGroup.get('email').errors">
+            El email es requerido
           </span>
         </span>
       </div>

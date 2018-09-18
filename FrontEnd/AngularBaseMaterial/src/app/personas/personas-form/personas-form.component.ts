@@ -26,7 +26,8 @@ export class PersonasFormComponent implements OnInit {
   ngOnInit() {
     this.formGroup = this.fb.group({
         nombre: '',
-        fechaNacimiento: ''
+        fechaNacimiento: '',
+        email: ''
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -45,7 +46,8 @@ export class PersonasFormComponent implements OnInit {
 
     this.formGroup.setValue({
         nombre: persona.nombre,
-        fechaNacimiento: formatDate(persona.fechaNacimiento,"yyyy-MM-dd", "es-EA")
+        fechaNacimiento: formatDate(persona.fechaNacimiento,"yyyy-MM-dd", "es-EA"),
+        email: persona.email
     });
     //console.log(new Date(persona.fechaNacimiento));
   }
