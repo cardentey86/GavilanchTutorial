@@ -28,11 +28,10 @@ export class PersonasFormComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   // REVISAR
-  email = new FormControl('', [
-      Validators.required,
-      Validators.email,
-
-  ]);
+  // email = new FormControl('', [
+  //     Validators.required,
+  //     Validators.email,
+  // ]);
 
   matcher = new MyErrorStateMatcher();
   // REVISAR
@@ -47,7 +46,7 @@ export class PersonasFormComponent implements OnInit {
     this.formGroup = this.fb.group({
         nombre: '',
         fechaNacimiento: '',
-        email: ''
+        email: ['', Validators.required, Validators.email]
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -75,9 +74,9 @@ export class PersonasFormComponent implements OnInit {
 
   save(){
     let persona: Persona = Object.assign({},this.formGroup.value);
-    
+
       // REVISAR
-    persona.email = this.email.value;
+   // persona.email = this.email.value;
       // REVISAR
 
     if(this.modoEdicion){
