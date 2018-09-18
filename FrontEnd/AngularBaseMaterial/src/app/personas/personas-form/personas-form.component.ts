@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {PersonaService} from '../persona.service';
 import {Persona} from '../persona';
 import {ActivatedRoute, Router} from '@angular/router';
 import {formatDate, registerLocaleData} from '@angular/common';
 import localeEs from '@angular/common/locales/es'
+import {ErrorStateMatcher} from '@angular/material';
 registerLocaleData(localeEs);
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        const isSubmitted = form && form.submitted;
+        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    }
+}
+
 @Component({
   selector: 'app-personas-form',
   templateUrl: './personas-form.component.html',
@@ -17,6 +26,14 @@ export class PersonasFormComponent implements OnInit {
               private personaService: PersonaService,
               private route: Router,
               private activatedRoute: ActivatedRoute) { }
+
+  email = new FormControl('', [
+      Validators.required,
+      Validators.email,
+      
+  ]);
+
+  matcher = new MyErrorStateMatcher();
 
   persona: Persona;
   formGroup: FormGroup;
@@ -55,6 +72,8 @@ export class PersonasFormComponent implements OnInit {
 
   save(){
     let persona: Persona = Object.assign({},this.formGroup.value);
+
+    persona.email = this.email.value;
 
     if(this.modoEdicion){
         persona.id = this.idPersona;

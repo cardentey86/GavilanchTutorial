@@ -3,7 +3,6 @@
 
 <form class="form" [formGroup]="formGroup" novalidate (ngSubmit)="save()">
 
-
   <fieldset>
     <div class="form-group" [ngClass]="{'has-error': (formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && !formGroup.get('nombre').valid}">
       <label class="col-md-2" for="nombre">Nombre</label>
@@ -30,15 +29,28 @@
     </div>
   
     <div class="form-group" [ngClass]="{'has-error': (formGroup.get('email').touched || formGroup.get('email').dirty) && !formGroup.get('email').valid}">
-      <label class="col-md-2" for="email">Fecha de Nacimiento</label>
-      <div class="col-md-8">
-        <input class="form-control" id="email" type="date" required formControlName="email">
-        <span class="" *ngIf="(formGroup.get('email').touched || formGroup.get('email').dirty) && formGroup.get('email').errors">
-          <span *ngIf="formGroup.get('email').errors">
-            El email es requerido
-          </span>
-        </span>
-      </div>
+      <mat-form-field>
+        <input matInput placeholder="Email"
+               [formControl]="email"
+               [errorStateMatcher]="matcher">
+        <mat-hint>Los errores aparecen al instante!</mat-hint>
+        <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+          Entre un email válido
+        </mat-error>
+        <mat-error *ngIf="email.hasError('required')">
+          El correo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+     
+      <!--<label class="col-md-2" for="email">Email</label>-->
+      <!--<div class="col-md-8">-->
+        <!--<input class="form-control" id="email" type="email" required formControlName="email">-->
+        <!--<span class="" *ngIf="(formGroup.get('email').touched || formGroup.get('email').dirty) && formGroup.get('email').errors">-->
+          <!--<span *ngIf="formGroup.get('email').errors">-->
+            <!--El email es requerido-->
+          <!--</span>-->
+        <!--</span>-->
+      <!--</div>-->
     </div>
 
     <div class="form-group">
@@ -46,7 +58,6 @@
         <span>
           <button mat-raised-button color="primary" type="submit" [disabled]="!formGroup.valid">Guardar</button>
           <button mat-raised-button color="red" [routerLink]='["/personas"]'>Cancelar</button>
-
         </span>
       </div>
     </div>

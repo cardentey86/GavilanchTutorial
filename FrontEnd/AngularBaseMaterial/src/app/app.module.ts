@@ -13,7 +13,7 @@ import {PersonaService} from './personas/persona.service';
 import {HttpClientModule} from '@angular/common/http';
 import { DeletePersonaComponent } from './personas/delete-persona/delete-persona.component';
 import { PersonasFormComponent } from './personas/personas-form/personas-form.component';
-import {MatNavList} from '@angular/material';
+import {ErrorStateMatcher, MatNavList, ShowOnDirtyErrorStateMatcher} from '@angular/material';
 import { DialogComponent } from './shared/dialog/dialog.component';
 
 
@@ -37,7 +37,7 @@ import { DialogComponent } from './shared/dialog/dialog.component';
       ReactiveFormsModule,
   ],
   entryComponents: [DialogComponent],
-  providers: [],
+  providers: [{provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

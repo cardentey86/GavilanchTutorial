@@ -9,6 +9,7 @@
       <th>Id</th>
       <th>Nombre</th>
       <th>Fecha Nacimiento</th>
+      <th>Email</th>
       <th>Acciones</th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
       <td>{{persona.id}}</td>
       <td>{{persona.nombre}}</td>
       <td>{{persona.fechaNacimiento | date:'dd-MM-yyyy'}} </td>
+      <td>{{persona.email}} </td>
       <td>
         <div fxLayout="row" fxLayoutGap="20px">
           <button mat-icon-button matTooltip="Editar" [matTooltipPosition]='["above"]'  [routerLink]='["/editPersonas/"+persona.id]'>
