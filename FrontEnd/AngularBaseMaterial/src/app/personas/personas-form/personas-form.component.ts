@@ -29,15 +29,7 @@ export class PersonasFormComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private adapter: DateAdapter<any>) { }
 
-  REVISAR
-  // email = new FormControl('', [
-  //       Validators.required,
-  //       Validators.email,
-  //   ]);
-
   matcher = new MyErrorStateMatcher();
-  // REVISAR
-
 
   persona: Persona;
   formGroup: FormGroup;
@@ -77,10 +69,6 @@ export class PersonasFormComponent implements OnInit {
 
   save(){
     let persona: Persona = Object.assign({},this.formGroup.value);
-
-      // REVISAR
-   // persona.email = this.email.value;
-      // REVISAR
 
     if(this.modoEdicion){
         persona.id = this.idPersona;
