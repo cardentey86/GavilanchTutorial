@@ -44,8 +44,8 @@ export class PersonasFormComponent implements OnInit {
 
   ngOnInit() {
     this.formGroup = this.fb.group({
-        nombre: '',
-        fechaNacimiento: '',
+        nombre: ['',[Validators.required]],
+        fechaNacimiento: ['',[Validators.required]],
         email: ['', [Validators.required, Validators.email]]
     });
 

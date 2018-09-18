@@ -1,8 +1,9 @@
-.has-error{
-    color: red;
+.container-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
 }
 
-.has-error #nombre, .has-error #fechaNacimiento{
-    border-color: red;
-    box-shadow: 0 0 2px red ;
+.field-full-width {
+    width: 100%;
 }

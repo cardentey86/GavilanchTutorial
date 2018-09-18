@@ -2,68 +2,53 @@
 <p *ngIf="modoEdicion">Editar Persona</p>
 
 <form class="form" [formGroup]="formGroup" novalidate (ngSubmit)="save()">
-
-  <fieldset>
-    <div class="form-group" [ngClass]="{'has-error': (formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && !formGroup.get('nombre').valid}">
-      <label class="col-md-2" for="nombre">Nombre</label>
-      <div class="col-md-8">
-        <input class="form-control" id="nombre" type="text" required formControlName="nombre">
-        <span *ngIf="(formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && formGroup.get('nombre').errors">
-          <span>
-            El nombre es requerido
-          </span>
-        </span>
-      </div>
+  <div class="container-form">
+    <div class="form-group">
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Nombre"
+               [formControl]="formGroup.get('nombre')"
+               [errorStateMatcher]="matcher">
+        <mat-hint>Los errores aparecen al instante!</mat-hint>
+        <mat-error *ngIf="formGroup.get('nombre').hasError('required')">
+          El nombre es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
     </div>
-
-    <div class="form-group" [ngClass]="{'has-error': (formGroup.get('fechaNacimiento').touched || formGroup.get('fechaNacimiento').dirty) && !formGroup.get('fechaNacimiento').valid}">
-      <label class="col-md-2" for="fechaNacimiento">Fecha de Nacimiento</label>
-      <div class="col-md-8">
-        <input class="form-control" id="fechaNacimiento" type="date" required formControlName="fechaNacimiento">
-        <span class="" *ngIf="(formGroup.get('fechaNacimiento').touched || formGroup.get('fechaNacimiento').dirty) && formGroup.get('fechaNacimiento').errors">
-          <span *ngIf="formGroup.get('fechaNacimiento').errors">
-            La fecha es requerida
-          </span>
-        </span>
-      </div>
+   
+    <div class="form-group">
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Fecha de Nacimiento"
+               [formControl]="formGroup.get('fechaNacimiento')"
+               [errorStateMatcher]="matcher">
+        <mat-hint>Los errores aparecen al instante!</mat-hint>
+        <mat-error *ngIf="formGroup.get('fechaNacimiento').hasError('required')">
+          La fecha de nacimiento es <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
     </div>
-  
-    <!--REVISAR-->
     
-    <div class="form-group" [ngClass]="{'has-error': (formGroup.get('email').touched || formGroup.get('email').dirty) && !formGroup.get('email').valid}">
-      <mat-form-field>
+    <div class="form-group">
+    <mat-form-field class="field-full-width">
         <input matInput placeholder="Email"
                [formControl]="formGroup.get('email')"
                [errorStateMatcher]="matcher">
         <mat-hint>Los errores aparecen al instante!</mat-hint>
-        <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+        <mat-error *ngIf="formGroup.get('email').hasError('email') && !formGroup.get('email').hasError('required')">
           Entre un email válido
         </mat-error>
-        <mat-error *ngIf="email.hasError('required')">
+        <mat-error *ngIf="formGroup.get('email').hasError('required')">
           El correo es <strong>requerido</strong>
         </mat-error>
       </mat-form-field>
-  
-      <!--REVISAR-->
-     
-      <!--<label class="col-md-2" for="email">Email</label>-->
-      <!--<div class="col-md-8">-->
-        <!--<input class="form-control" id="email" type="email" required formControlName="email">-->
-        <!--<span class="" *ngIf="(formGroup.get('email').touched || formGroup.get('email').dirty) && formGroup.get('email').errors">-->
-          <!--<span *ngIf="formGroup.get('email').errors">-->
-            <!--El email es requerido-->
-          <!--</span>-->
-        <!--</span>-->
-      <!--</div>-->
     </div>
-
+   
     <div class="form-group">
-      <div class="col-md-4">
+      <div class="col-12 field-full-width">
         <span>
           <button mat-raised-button color="primary" type="submit" [disabled]="!formGroup.valid">Guardar</button>
           <button mat-raised-button color="red" [routerLink]='["/personas"]'>Cancelar</button>
         </span>
       </div>
     </div>
-  </fieldset>
+  </div>
 </form>
