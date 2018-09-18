@@ -3,8 +3,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {PersonaService} from '../persona.service';
 import {Persona} from '../persona';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DatePipe} from '@angular/common';
-
+import {formatDate, registerLocaleData} from '@angular/common';
+import localeEs from '@angular/common/locales/es'
+registerLocaleData(localeEs);
 @Component({
   selector: 'app-personas-form',
   templateUrl: './personas-form.component.html',
@@ -21,23 +22,12 @@ export class PersonasFormComponent implements OnInit {
   formGroup: FormGroup;
   modoEdicion: boolean = false;
   idPersona: number;
-  fecha: string;
-  pos: number;
-    date = new Date();
-
-    options = {
-        year: "numeric",
-        month: "2-digit",
-        day: "numeric"
-    };
 
   ngOnInit() {
     this.formGroup = this.fb.group({
         nombre: '',
         fechaNacimiento: ''
     });
-
-
 
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined)
@@ -52,21 +42,12 @@ export class PersonasFormComponent implements OnInit {
   }
 
   cargarFormularioEditar(persona: Persona){
-   // var dp = new DatePipe(navigator.language);
-    this.pos = persona.fechaNacimiento.toString().indexOf('T');
-    this.fecha = persona.fechaNacimiento.toString().substr(0,this.pos);
-    //this.date = new Date(persona.fechaNacimiento);
 
-    this.formGroup.patchValue({
+    this.formGroup.setValue({
         nombre: persona.nombre,
-
-        fechaNacimiento: this.fecha
-       // fechaNacimiento: dp.transform(persona.fechaNacimiento, "yyyy-MM-dd")
-
+        fechaNacimiento: formatDate(persona.fechaNacimiento,"yyyy-MM-dd", "es-EA")
     });
-
-    console.log(this.fecha);
-
+    //console.log(new Date(persona.fechaNacimiento));
   }
 
 
@@ -85,4 +66,6 @@ export class PersonasFormComponent implements OnInit {
     onSaveSuccess(){
       this.route.navigate(['/personas'])
   }
+
+
 }
