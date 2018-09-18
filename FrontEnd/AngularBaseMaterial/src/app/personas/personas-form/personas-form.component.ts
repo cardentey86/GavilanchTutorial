@@ -3,10 +3,10 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {PersonaService} from '../persona.service';
 import {Persona} from '../persona';
 import {ActivatedRoute, Router} from '@angular/router';
-import {formatDate, registerLocaleData} from '@angular/common';
-import localeEs from '@angular/common/locales/es'
-import {ErrorStateMatcher} from '@angular/material';
-registerLocaleData(localeEs);
+// import {formatDate, registerLocaleData} from '@angular/common';
+// import localeEs from '@angular/common/locales/es'
+import {DateAdapter, ErrorStateMatcher} from '@angular/material';
+// registerLocaleData(localeEs);
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -18,14 +18,16 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-personas-form',
   templateUrl: './personas-form.component.html',
-  styleUrls: ['./personas-form.component.css']
+  styleUrls: ['./personas-form.component.css'],
+
 })
 export class PersonasFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private personaService: PersonaService,
               private route: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private adapter: DateAdapter<any>) { }
 
   REVISAR
   // email = new FormControl('', [
@@ -65,7 +67,8 @@ export class PersonasFormComponent implements OnInit {
 
     this.formGroup.setValue({
         nombre: persona.nombre,
-        fechaNacimiento: formatDate(persona.fechaNacimiento,"yyyy-MM-dd", "es-EA"),
+        fechaNacimiento: persona.fechaNacimiento,
+        // fechaNacimiento: formatDate(persona.fechaNacimiento,"yyyy-MM-dd", "es-EA"),
         email: persona.email
     });
     //console.log(new Date(persona.fechaNacimiento));
