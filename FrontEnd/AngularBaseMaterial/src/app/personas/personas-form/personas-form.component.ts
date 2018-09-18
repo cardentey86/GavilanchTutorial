@@ -27,11 +27,11 @@ export class PersonasFormComponent implements OnInit {
               private route: Router,
               private activatedRoute: ActivatedRoute) { }
 
-  // REVISAR
+  REVISAR
   // email = new FormControl('', [
-  //     Validators.required,
-  //     Validators.email,
-  // ]);
+  //       Validators.required,
+  //       Validators.email,
+  //   ]);
 
   matcher = new MyErrorStateMatcher();
   // REVISAR
@@ -46,7 +46,7 @@ export class PersonasFormComponent implements OnInit {
     this.formGroup = this.fb.group({
         nombre: '',
         fechaNacimiento: '',
-        email: ['', Validators.required, Validators.email]
+        email: ['', [Validators.required, Validators.email]]
     });
 
     this.activatedRoute.params.subscribe(params => {
