@@ -30,10 +30,11 @@ export class PersonasComponent implements OnInit {
 
   modalDialog(persona: Persona): void {
       const dialogRef = this.dialog.open(DialogComponent, {
+           width: '550px',
            data: {
                persona: persona,
                title : "Confirmacion",
-               message: "Desea eliminar: "+persona.nombre
+               message: "Desea eliminar a: "+persona.nombre
            }
       });
 

@@ -1,6 +1,6 @@
-<div fxLayout="row" fxLayoutGap="30px">
+<div fxLayout="row" class="position-relative">
   <h3 mat-dialog-title="">{{data.title}}</h3>
-  <button mat-icon-button (click)="close()">
+  <button mat-icon-button class="position-absolute" style="right: 0" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
 </div>
@@ -8,7 +8,9 @@
 <mat-dialog-content>
   <p>{{data.message}}</p>
 </mat-dialog-content>
-<mat-dialog-actions>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-raised-button  mat-dialog-close>Cancelar</button>
   <button mat-raised-button (click)="aceptar()" color="primary">Aceptar</button>
 </mat-dialog-actions>
+
